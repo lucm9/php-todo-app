@@ -85,7 +85,7 @@ pipeline {
                  def uploadSpec = """{
                     "files": [
                       {
-                       "pattern": "php-todo.zip",
+                       "pattern": "php-todo-app.zip",
                        "target": "generic-local/php-todo-app",
                        "props": "type=zip;status=ready"
 
