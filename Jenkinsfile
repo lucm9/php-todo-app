@@ -35,12 +35,14 @@ pipeline {
   stage('Code Analysis') {
     steps {
         script {
-            def composerBin = sh(script: 'composer -g global config bin-dir --absolute', returnStdout: true).trim()
+            // Specify the Composer global bin directory manually
+            def composerBin = '/var/lib/jenkins/.composer/vendor/bin'
             sh "export PATH=\$PATH:${composerBin}"
             sh 'phploc app/ --log-csv build/logs/phploc.csv'
         }
     }
 }
+
 
       
            stage('Plot Code Coverage Report') {
