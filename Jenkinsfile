@@ -28,7 +28,7 @@ pipeline {
 
         stage('Execute Unit Tests') {
             steps {
-                sh './vendor/bin/phpunit'
+                sh '/home/ec2-user/php-todo-app/phpunit'
             }
         }
 
