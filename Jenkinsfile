@@ -26,12 +26,11 @@ pipeline {
             }
         }
 
-       stage('Code Analysis') {
-    steps {
-        sh '~/.composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv'
-    }
-}
-
+        stage('Execute Unit Tests') {
+            steps {
+                sh './vendor/bin/phpunit'
+            }
+        }
 
 stage('Code Analysis') {
     steps {
@@ -40,7 +39,8 @@ stage('Code Analysis') {
             // sh 'mkdir -p build/logs'
 
             // Run phploc command
-            sh 'phploc app/ --log-csv build/logs/phploc.csv'
+                    sh '~/.composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv'
+
         }
     }
 }
