@@ -35,11 +35,7 @@ pipeline {
 stage('Code Analysis') {
     steps {
         script {
-            // // Create the build/logs directory if it doesn't exist
-            // sh 'mkdir -p build/logs'
-
-            // Run phploc command
-                    sh '~/.composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv'
+            sh 'phploc app/ --log-csv build/logs/phploc.csv'
 
         }
     }
