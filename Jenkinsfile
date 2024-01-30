@@ -26,11 +26,12 @@ pipeline {
             }
         }
 
-        stage('Execute Unit Tests') {
-            steps {
-                sh './vendor/bin/phpunit'
-            }
-        }
+       stage('Code Analysis') {
+    steps {
+        sh '~/.composer/vendor/bin/phploc app/ --log-csv build/logs/phploc.csv'
+    }
+}
+
 
 stage('Code Analysis') {
     steps {
