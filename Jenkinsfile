@@ -32,9 +32,14 @@ pipeline {
             }
         }
 
-stage('Code Analysis') {
-    steps {
-        script {
+        stage('Check Jenkins User') {
+            steps {
+                sh 'whoami'
+    }
+}
+        stage('Code Analysis') {
+            steps {
+                script {
             sh 'phploc app/ --log-csv build/logs/phploc.csv'
 
         }
