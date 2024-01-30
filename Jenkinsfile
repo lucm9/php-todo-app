@@ -32,18 +32,14 @@ pipeline {
             }
         }
 
-  stage('Code Analysis') {
+ stage('Code Analysis') {
     steps {
         script {
-            // Specify the Composer global bin directory manually
-            def composerBin = '/var/lib/jenkins/.composer/vendor/bin'
-            sh "export PATH=\$PATH:${composerBin}"
+            sh 'export PATH=$PATH:/var/lib/jenkins/.composer/vendor/bin'
             sh 'phploc app/ --log-csv build/logs/phploc.csv'
         }
     }
 }
-
-
       
            stage('Plot Code Coverage Report') {
       steps {
