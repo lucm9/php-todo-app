@@ -16,13 +16,19 @@ pipeline {
             }
         }
 
+               stage('Check Jenkins User') {
+            steps {
+                sh 'whoami'
+                }
+        }
+
         stage('Prepare Dependencies') {
             steps {
                 sh 'mv .env.sample .env'
                 sh 'composer install'
-                // sh 'php artisan migrate --force'
-                // sh 'php artisan db:seed'
-                // sh 'php artisan key:generate'
+                sh 'php artisan migrate --force'
+                sh 'php artisan db:seed'
+                sh 'php artisan key:generate'
             }
         }
 
@@ -32,11 +38,6 @@ pipeline {
             }
         }
 
-        stage('Check Jenkins User') {
-            steps {
-                sh 'whoami'
-    }
-}
         stage('Code Analysis') {
             steps {
                 script {
@@ -45,7 +46,6 @@ pipeline {
         }
     }
 }
-
       
            stage('Plot Code Coverage Report') {
       steps {
