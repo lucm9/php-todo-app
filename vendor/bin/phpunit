@@ -1,48 +1,39 @@
-<?php
+// tests/CalculatorTest.php
+use PHPUnit\Framework\TestCase;
 
-namespace Zubair\TestProject;
+class CalculatorTest extends TestCase {
+    public function testAdd() {
+        $calculator = new Calculator();
+        $result = $calculator->add(2, 3);
 
-use InvalidArgumentException;
-
-class User
-{
-    public int $age;
-    public array $favorite_movies = [];
-    public string $name;
-
-    /**
-     * @param int $age
-     * @param string $name
-     */
-    public function __construct(int $age, string $name)
-    {
-        $this->age = $age;
-        $this->name = $name;
+        $this->assertEquals(5, $result);
     }
 
-    public function tellName(): string
-    {
-        return "My name is " . $this->name . ".";
+    public function testSubtract() {
+        $calculator = new Calculator();
+        $result = $calculator->subtract(5, 2);
+
+        $this->assertEquals(3, $result);
     }
 
-    public function tellAge(): string
-    {
-        return "I am " . $this->age . " years old.";
+    public function testMultiply() {
+        $calculator = new Calculator();
+        $result = $calculator->multiply(4, 2);
+
+        $this->assertEquals(8, $result);
     }
 
-    public function addFavoriteMovie(string $movie): bool
-    {
-        $this->favorite_movies[] = $movie;
+    public function testDivide() {
+        $calculator = new Calculator();
+        $result = $calculator->divide(6, 2);
 
-        return true;
+        $this->assertEquals(3, $result);
     }
 
-    public function removeFavoriteMovie(string $movie): bool
-    {
-        if (!in_array($movie, $this->favorite_movies)) throw new InvalidArgumentException("Unknown movie: " . $movie);
+    public function testDivideByZero() {
+        $this->expectException(InvalidArgumentException::class);
 
-        unset($this->favorite_movies[array_search($movie, $this->favorite_movies)]);
-
-        return true;
+        $calculator = new Calculator();
+        $calculator->divide(6, 0);
     }
 }
