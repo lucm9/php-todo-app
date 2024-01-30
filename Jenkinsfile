@@ -32,14 +32,18 @@ pipeline {
             }
         }
 
- stage('Code Analysis') {
+stage('Code Analysis') {
     steps {
         script {
-            sh 'export PATH=$PATH:/var/lib/jenkins/.composer/vendor/bin'
+            // Create the build/logs directory if it doesn't exist
+            sh 'mkdir -p build/logs'
+
+            // Run phploc command
             sh 'phploc app/ --log-csv build/logs/phploc.csv'
         }
     }
 }
+
       
            stage('Plot Code Coverage Report') {
       steps {
